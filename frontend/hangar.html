@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pt-MZ">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="Explora o hangar da Terra e visita os terminais de preparação.">
+  <title>Hangar da Terra · Pequenos Astronautas</title>
+  <link rel="stylesheet" href="./estilo.css">
+  <link rel="stylesheet" href="./missao.css">
+  <link rel="stylesheet" href="./acesso.css">
+  <link rel="stylesheet" href="./jogo-3d.css">
+  <script type="module" src="./jogo.js"></script>
+</head>
+<body class="jogo-imersivo">
+  <div class="shell">
+    <header class="topo hud-topo">
+      <div class="hud-identidade">
+        <span class="marca"><span class="orbita" aria-hidden="true"></span> Pequenos Astronautas</span>
+        <h1 id="cena-titulo">Hangar da Terra</h1>
+        <span id="partida-status" class="local" role="status">A ligar à partida</span>
+      </div>
+      <nav class="estado hud-controlos" aria-label="Controlos da missão">
+        <button id="alternar-aula" type="button" aria-controls="aula" aria-expanded="false" disabled>Ciência de bordo</button>
+        <button id="ver-cabine" type="button" aria-pressed="false" hidden>Alternar vista da nave</button>
+        <button id="mapa-planeta" type="button" aria-haspopup="dialog" hidden>Globo</button>
+        <button id="traje" type="button" hidden>Traje espacial</button>
+        <button id="abrir-equipa" type="button" aria-haspopup="dialog">Tripulação</button>
+        <button id="abrir-chat" type="button" aria-haspopup="dialog" disabled>Conversa</button>
+        <button id="voz" type="button" aria-pressed="false">Narração</button>
+        <button id="som" type="button" aria-pressed="false">Som</button>
+        <button id="expandir" type="button">Ecrã inteiro</button>
+        <a id="ver-partidas" href="./partidas.html">As minhas partidas</a>
+      </nav>
+    </header>
+    <main id="jogo" hidden>
+      <section id="palco" class="palco" aria-label="Cena tridimensional da missão">
+        <canvas id="hangar" aria-label="Mundo 3D"></canvas>
+        <div id="marcadores" class="marcadores" aria-hidden="true"></div>
+        <div id="joystick" class="joystick" aria-label="Joystick de movimento">
+          <span id="alavanca" class="alavanca" aria-hidden="true"></span>
+        </div>
+        <button id="interagir" class="interagir" type="button" disabled>Interagir</button>
+        <button id="saltar" type="button" hidden>Saltar</button>
+      </section>
+
+      <div class="hud-telemetria">
+        <p id="direccao-posto" class="direccao-posto" hidden><span aria-hidden="true">↑</span><span></span></p>
+        <p id="resultado-posto" class="resultado-posto" role="status" hidden></p>
+        <p id="ambiente-superficie" class="ambiente-superficie" hidden></p>
+        <p id="proximidade" class="proximidade" role="status">A carregar o mundo 3D</p>
+        <p id="erro" class="erro" role="alert" hidden></p>
+        <p id="aviso-missao" class="erro-missao" role="alert"></p>
+      </div>
+
+      <aside id="aula" class="hud-aula" aria-labelledby="aula-titulo" hidden>
+        <div class="hud-linha">
+          <span id="aula-tipo">Diário de bordo</span>
+          <button id="aula-ouvir" type="button">Ouvir conceito</button>
+        </div>
+        <h2 id="aula-titulo"></h2>
+        <p id="aula-texto"></p>
+      </aside>
+
+      <section id="painel-missao" class="painel-missao" hidden>
+        <button id="alternar-missao" type="button" aria-controls="tarefa" aria-expanded="false">Objectivo da missão</button>
+        <section id="tarefa" class="bloco-missao" aria-label="Objectivo da missão" hidden></section>
+      </section>
+      <div id="efeito-missao" aria-hidden="true"></div>
+    </main>
+  </div>
+
+  <dialog id="globo-dialogo" aria-labelledby="globo-titulo">
+    <div class="dialogo-topo">
+      <h2 id="globo-titulo">Globo</h2>
+      <form method="dialog"><button id="globo-fechar" class="fechar" aria-label="Fechar globo">×</button></form>
+    </div>
+    <canvas id="globo-canvas" aria-label="Globo interactivo. Arrasta para rodar e toca para marcar um ponto."></canvas>
+    <p id="globo-ajuda">Arrasta para rodar e toca para marcar o ponto de pouso.</p>
+    <div id="globo-controlos">
+      <label>Latitude <input id="globo-lat" type="range" min="-90" max="90" value="0"></label>
+      <label>Longitude <input id="globo-lon" type="range" min="-180" max="180" value="90"></label>
+    </div>
+    <p id="globo-coord"></p>
+    <p id="globo-detalhe"></p>
+    <p id="globo-erro" class="erro-missao" role="alert"></p>
+    <button id="globo-confirmar" class="botao primario" type="button">Pousar aqui</button>
+  </dialog>
+  <dialog id="equipa-dialogo" aria-label="Tripulação">
+    <div class="dialogo-topo">
+      <h2>Tripulação</h2>
+      <button id="fechar-equipa" class="fechar" type="button" aria-label="Fechar tripulação">×</button>
+    </div>
+    <section id="equipa"></section>
+  </dialog>
+  <dialog id="terminal-dialogo" aria-labelledby="terminal-titulo">
+    <div class="dialogo-topo">
+      <span id="terminal-cor" class="luz" aria-hidden="true"></span>
+      <button id="fechar" class="fechar" type="button" aria-label="Fechar terminal" autofocus>×</button>
+    </div>
+    <h2 id="terminal-titulo"></h2>
+    <p id="terminal-descricao"></p>
+    <ul id="terminal-detalhes"></ul>
+    <section id="terminal-jogo"></section>
+  </dialog>
+  <dialog id="chat-dialogo" class="dialogo-comunicacao" aria-labelledby="chat-titulo">
+    <div class="dialogo-topo">
+      <h2 id="chat-titulo">Conversa da equipa</h2>
+      <form method="dialog"><button class="fechar" aria-label="Fechar conversa">×</button></form>
+    </div>
+    <p id="chat-vazio">Ainda não há mensagens.</p>
+    <button id="chat-antigas" class="botao" type="button" hidden>Carregar mensagens anteriores</button>
+    <ol id="chat-mensagens" aria-label="Mensagens da equipa" aria-live="polite"></ol>
+    <div id="chat-frases" class="linha"></div>
+    <p id="chat-politica">As frases e o texto expiram em 7 dias. A voz expira em 24 horas.</p>
+    <form id="chat-texto" class="formulario-chat">
+      <label for="chat-campo">Mensagem</label>
+      <textarea id="chat-campo" class="campo" rows="2" maxlength="500" required></textarea>
+      <button id="chat-enviar" class="botao primario">Enviar texto</button>
+    </form>
+    <div class="linha chat-audio">
+      <button id="chat-gravar" class="botao" type="button">Gravar voz</button>
+      <button id="chat-parar" class="botao" type="button" hidden>Parar gravação</button>
+      <button id="chat-enviar-audio" class="botao primario" type="button" hidden>Enviar voz</button>
+      <button id="chat-descartar" class="botao" type="button" hidden>Descartar gravação</button>
+    </div>
+    <audio id="chat-previa" controls hidden aria-label="Prévia da gravação"></audio>
+    <p id="chat-aviso" class="aviso-acesso" role="status"></p>
+  </dialog>
+
+  <dialog id="convite-hangar" aria-labelledby="convite-hangar-titulo">
+    <div class="dialogo-topo">
+      <h2 id="convite-hangar-titulo">Convidar astronauta</h2>
+      <form method="dialog"><button class="fechar" aria-label="Fechar convite">×</button></form>
+    </div>
+    <form id="enviar-convite" class="formulario-acesso">
+      <p>Partilha o código fora do jogo com alguém que conheças. Expira em 30 minutos e só pode ser usado uma vez.</p>
+      <button class="botao primario">Gerar código privado</button>
+      <label id="codigo-gerado-rotulo" hidden>Código privado<input id="codigo-gerado" class="campo" readonly></label>
+    </form>
+    <p id="aviso-convite" class="aviso-acesso" role="status"></p>
+  </dialog>
+</body>
+</html>

@@ -1,0 +1,107 @@
+[hidden] { display: none !important; }
+
+.acesso-shell, .partidas-shell { max-width: 1130px; }
+.acesso-grelha {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(285px, 1fr);
+  align-items: center;
+  gap: clamp(26px, 6vw, 88px);
+  min-height: calc(100dvh - 100px);
+}
+.acesso-ilustracao {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 360px;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 50%;
+  background:
+    radial-gradient(1px 1px at 19px 23px, #d3ebff 90%, transparent) 0 0 / 73px 63px,
+    radial-gradient(1px 1px at 34px 7px, #67b0db 90%, transparent) 0 0 / 97px 84px;
+  mask-image: radial-gradient(ellipse, #000 51%, transparent 76%);
+}
+.acesso-ilustracao::after {
+  content: "";
+  position: absolute;
+  width: 79%;
+  height: 34%;
+  border: 1px solid #8ed1e9aa;
+  border-top-color: #6086a237;
+  border-radius: 50%;
+  transform: rotate(-24deg);
+}
+.acesso-planeta {
+  width: min(49%, 250px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    repeating-linear-gradient(158deg, #5bcada29 0 5px, transparent 5px 19px),
+    radial-gradient(circle at 33% 30%, #79d3e2, #367c97 48%, #12283c 76%);
+  box-shadow: 0 0 50px #36bcd64a, inset -18px -12px 40px #0a1528;
+}
+.acesso-cartao { padding: clamp(20px, 5vw, 40px); }
+.acesso-cartao h1, .partidas-topo h1 { font-size: clamp(1.95rem, 5vw, 3rem); }
+.formulario-acesso {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+.formulario-acesso label, .ajuda-campo { display: grid; gap: 5px; color: #c7d9ee; font-size: .9rem; }
+.formulario-acesso .campo { width: 100%; }
+.acesso-cartao .aviso-acesso { margin: 12px 0 0; }
+.aviso-acesso:empty { display: none; }
+.aviso-acesso { color: #c7e3f2; line-height: 1.5; }
+.partidas-pagina { padding-top: clamp(24px, 7vw, 74px); }
+.partidas-topo { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+.partidas-topo p { margin: 8px 0 0; color: var(--suave); }
+.partidas-pagina .partidas-guardadas { margin-top: 20px; }
+.partidas-guardadas li {
+  flex-wrap: wrap;
+  padding: 14px;
+  border: 1px solid #344c68;
+  border-radius: 10px;
+  background: #102035;
+}
+.partida-descricao { display: grid; gap: 5px; overflow-wrap: anywhere; }
+.partida-descricao span { font-size: .83rem; color: var(--suave); }
+#associar-anterior { margin-top: 15px; }
+.dialogo-comunicacao { width: min(560px, calc(100vw - 22px)); max-height: 90dvh; }
+.dialogo-comunicacao .dialogo-topo h2, #convite-hangar h2 { margin: 0; }
+#ver-partidas { text-decoration: none; }
+#chat-mensagens {
+  display: grid;
+  gap: 8px;
+  max-height: min(43dvh, 420px);
+  overflow: auto;
+  padding: 0 4px 0 0;
+  margin: 14px 0;
+  list-style: none;
+}
+#chat-mensagens:empty { margin: 0; }
+.mensagem {
+  min-width: 0;
+  padding: 8px 11px;
+  border: 1px solid #385575;
+  border-radius: 9px;
+  background: #192e47;
+}
+.mensagem.propria { border-color: #477779; background: #18353f; }
+.mensagem > div { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px; }
+.mensagem time { font-size: .78rem; color: var(--suave); }
+.mensagem p { margin: 4px 0 0; overflow-wrap: anywhere; white-space: pre-wrap; }
+.mensagem .botao { min-height: 32px; padding: 3px 9px; margin-top: 5px; }
+#chat-dialogo audio { display: block; width: min(100%, 300px); height: 42px; margin-top: 6px; }
+.formulario-chat { display: grid; justify-items: start; gap: 6px; margin-top: 12px; }
+.formulario-chat .campo { margin: 0; }
+.chat-audio { margin-top: 9px; }
+@media (max-width: 640px) {
+  .acesso-grelha { min-height: auto; display: block; padding-top: 28px; }
+  .acesso-ilustracao { display: none; }
+  .partidas-accoes .botao { min-height: 44px; }
+  #chat-mensagens { max-height: 31dvh; }
+}
+@media (max-width: 520px) {
+  .topo:has(#abrir-chat) { flex-wrap: wrap; padding: 8px 0; }
+  .topo:has(#abrir-chat) .estado { justify-content: start; }
+}

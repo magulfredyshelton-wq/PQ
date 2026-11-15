@@ -1,0 +1,15 @@
+[Unit]
+Description=Pequenos Astronautas
+After=network.target
+
+[Service]
+Type=simple
+User=astronautas
+Group=astronautas
+WorkingDirectory=/opt/astronautas/backend
+ExecStart=/opt/astronautas/backend/.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --proxy-headers --forwarded-allow-ips=127.0.0.1
+Restart=on-failure
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

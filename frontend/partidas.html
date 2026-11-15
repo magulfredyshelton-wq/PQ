@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-MZ">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>As minhas partidas · Pequenos Astronautas</title>
+  <link rel="stylesheet" href="./estilo.css">
+  <link rel="stylesheet" href="./missao.css">
+  <link rel="stylesheet" href="./acesso.css">
+  <script type="module" src="./partidas.js"></script>
+</head>
+<body class="acesso">
+  <div class="shell partidas-shell">
+    <header class="topo">
+      <span class="marca"><span class="orbita" aria-hidden="true"></span> Pequenos Astronautas</span>
+      <button id="sair-conta" class="som" type="button" hidden>Sair da conta</button>
+    </header>
+    <main class="partidas-pagina">
+      <div class="partidas-topo">
+        <div>
+          <h1>As minhas partidas</h1>
+          <p id="perfil-jogador"></p>
+        </div>
+        <div class="linha partidas-accoes">
+          <button id="abrir-convites" class="botao" type="button" aria-haspopup="dialog" disabled>Convites</button>
+          <button id="criar-partida" class="botao primario" type="button" disabled>Nova partida</button>
+        </div>
+      </div>
+      <section id="perfil-nickname" class="consola" aria-labelledby="nickname-titulo" hidden>
+        <h2 id="nickname-titulo">Escolhe o teu nickname</h2>
+        <p id="nickname-ajuda">Usa 3 a 20 letras sem acentos, números ou _. Começa por uma letra ou número.</p>
+        <form id="definir-nickname" class="linha">
+          <label>Nickname<input id="nickname-jogador" class="campo" maxlength="21"
+            pattern="@?[A-Za-z0-9][A-Za-z0-9_]{2,19}" placeholder="aurora_01" autocomplete="nickname"
+            autocapitalize="none" spellcheck="false" aria-describedby="nickname-ajuda" required></label>
+          <button class="botao primario">Guardar nickname</button>
+        </form>
+        <p id="aviso-nickname" class="aviso-acesso" role="status"></p>
+      </section>
+      <section id="painel-consentimento" class="consola" hidden>
+        <h2>Autorização para jogar em equipa</h2>
+        <p>Pede ao teu responsável para introduzir o email. Podes jogar a solo enquanto esperas.</p>
+        <form id="pedir-consentimento" class="linha">
+          <label>Email do responsável<input id="email-responsavel" class="campo" type="email" required></label>
+          <button class="botao">Pedir autorização</button>
+        </form>
+        <p id="aviso-consentimento" role="status"></p>
+      </section>
+      <p id="aviso-partidas" class="aviso-acesso" role="status">A carregar as tuas partidas…</p>
+      <ul id="partidas-guardadas" class="partidas-guardadas"></ul>
+      <button id="associar-anterior" class="botao" type="button" hidden>Associar partida antiga</button>
+    </main>
+  </div>
+  <dialog id="convites-dialogo" class="dialogo-comunicacao" aria-labelledby="convites-titulo">
+    <div class="dialogo-topo">
+      <h2 id="convites-titulo">Convites para jogar</h2>
+      <form method="dialog"><button class="fechar" aria-label="Fechar convites">×</button></form>
+    </div>
+    <form id="usar-convite" class="formulario-acesso">
+      <label>Código privado<input id="codigo-convite" class="campo" maxlength="160" autocomplete="off" required></label>
+      <button class="botao primario">Entrar na equipa</button>
+    </form>
+    <p id="aviso-convites" class="aviso-acesso" role="status"></p>
+  </dialog>
+</body>
+</html>

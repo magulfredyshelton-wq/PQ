@@ -1,0 +1,116 @@
+body.jogo-imersivo {
+  --superficie-hud: rgba(9, 17, 36, .91);
+  --linha-hud: rgba(165, 189, 235, .34);
+  margin: 0;
+  background: #090f22;
+  overflow: hidden;
+  color: #ecf3ff;
+}
+.jogo-imersivo .shell { width: 100%; height: 100dvh; max-width: none; margin: 0; padding: 0; }
+.jogo-imersivo #jogo { position: fixed; inset: 0; display: block; }
+.jogo-imersivo #jogo[hidden], .jogo-imersivo [hidden] { display: none !important; }
+.jogo-imersivo .palco { position: absolute; inset: 0; min-height: 0; height: auto; border: 0; border-radius: 0; background: #090f22; box-shadow: none; }
+.jogo-imersivo #hangar { display: block; width: 100%; height: 100%; }
+.jogo-imersivo .hud-topo { z-index: 5; position: fixed; inset: 0 0 auto; display: flex; justify-content: space-between; align-items: start; gap: 1rem; padding: max(.9rem, env(safe-area-inset-top)) 1.5rem 2.3rem; pointer-events: none; background: linear-gradient(#080e20ed, #080e2066 65%, transparent); }
+.jogo-imersivo .hud-controlos { display: flex; gap: .4rem; flex-wrap: wrap; justify-content: end; pointer-events: auto; }
+.hud-identidade { min-width: 0; }
+.hud-identidade .marca { color: #a9bbdd; font: 600 .75rem/1.1 system-ui, sans-serif; }
+.hud-identidade h1 { font: 680 clamp(1.15rem, 2.3vw, 2.15rem)/1.04 system-ui, sans-serif; letter-spacing: -.055em; margin: .4rem 0 .14rem; }
+.hud-identidade .local { font-size: .69rem; color: #b8cfed; }
+.jogo-imersivo .controlo-icone { display: inline-grid; place-items: center; width: 2.75rem; min-width: 2.75rem; height: 2.75rem; min-height: 2.75rem; padding: 0; border: 1px solid var(--linha-hud); border-radius: .75rem; background: var(--superficie-hud); color: #e5edff; cursor: pointer; text-decoration: none; }
+.jogo-imersivo .controlo-icone svg { width: 1.27rem; height: 1.27rem; }
+.jogo-imersivo .controlo-icone:hover, .jogo-imersivo .controlo-icone[aria-pressed="true"] { border-color: #80dce9; color: #b5fbff; }
+.jogo-imersivo .controlo-icone:disabled { opacity: .44; cursor: default; }
+.jogo-imersivo .controlo-icone:focus-visible { outline: 2px solid #98f8ff; outline-offset: 3px; }
+.jogo-imersivo .controlo-icone.primario { color: #b0faff; background: #203e5b; }
+.hud-telemetria { position: fixed; z-index: 5; inset: auto 1rem .8rem; text-align: center; pointer-events: none; }
+.hud-telemetria .proximidade, .hud-telemetria .erro, .hud-telemetria .erro-missao { position: static; margin: .2rem auto; width: fit-content; max-width: min(90vw, 34rem); padding: .36rem .68rem; border-radius: .55rem; background: #091123e0; color: #e2edff; font-size: .75rem; }
+.hud-telemetria .erro-missao:empty { display: none; }
+.jogo-imersivo .joystick { z-index: 4; position: absolute; bottom: 3.15rem; left: max(1.2rem, env(safe-area-inset-left)); }
+.jogo-imersivo #interagir { z-index: 4; position: absolute; bottom: 3.15rem; right: max(1.25rem, env(safe-area-inset-right)); width: 3.45rem; height: 3.45rem; }
+.jogo-imersivo #saltar { z-index: 4; position: absolute; bottom: 3.15rem; right: 5.15rem; }
+.jogo-imersivo .marcadores { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.jogo-imersivo .marcador { z-index: 2; }
+.jogo-imersivo .painel-missao { z-index: 4; position: fixed; inset: auto max(1.25rem, env(safe-area-inset-right)) 7.3rem auto; display: flex; flex-direction: column; align-items: flex-end; gap: .5rem; width: min(23rem, calc(100vw - 2.5rem)); margin: 0; }
+.jogo-imersivo #alternar-missao { order: 1; }
+.jogo-imersivo #alternar-missao.alerta-activo { color: #ffca8f; border-color: #ff9c67; box-shadow: 0 0 18px #ff855c75; animation: pulso-alerta 1.15s ease-in-out infinite alternate; }
+.jogo-imersivo #tarefa { width: 100%; max-height: min(46vh, 26rem); overflow: auto; overscroll-behavior: contain; margin: 0; padding: .9rem; background: var(--superficie-hud); border: 1px solid var(--linha-hud); border-radius: .85rem; backdrop-filter: blur(12px); box-shadow: 0 14px 34px #0007; }
+.jogo-imersivo #tarefa > h2 { margin: 0 0 .4rem; font-size: 1rem; }
+.jogo-imersivo #tarefa > p { font-size: .81rem; }
+.jogo-imersivo #tarefa .grelha-dados { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.jogo-imersivo #tarefa .dado { font-size: .68rem; }
+.escolhas { display: grid; gap: .45rem; }
+.jogo-imersivo .escolha-acao { display: flex; align-items: center; gap: .55rem; text-align: left; background: #20304c; border: 1px solid #637695; color: #f2f7ff; padding: .57rem; min-height: 2.6rem; font-size: .8rem; }
+.escolha-acao svg { width: 1rem; height: 1rem; flex: none; color: #a4ecfc; }
+.hud-aula { position: fixed; left: max(1.25rem, env(safe-area-inset-left)); bottom: 7.3rem; width: min(20rem, calc(100vw - 2.5rem)); padding: .85rem .95rem; z-index: 4; border: 1px solid var(--linha-hud); border-radius: .85rem; background: var(--superficie-hud); backdrop-filter: blur(12px); }
+.hud-linha { display: flex; justify-content: space-between; align-items: center; gap: .45rem; }
+.hud-linha span { color: #8fdfed; font-size: .67rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+.hud-aula h2 { margin: .25rem 0; font-size: 1.05rem; }
+.hud-aula p { margin: .3rem 0 0; color: #d0dff6; font-size: .83rem; line-height: 1.45; }
+.jogo-imersivo .hud-aula .controlo-icone { width: 2rem; height: 2rem; min-width: 2rem; min-height: 2rem; }
+.jogo-imersivo #efeito-missao { position: fixed; inset: 0; pointer-events: none; opacity: 0; z-index: 3; }
+.jogo-imersivo #efeito-missao[data-tipo="risco"] { background: radial-gradient(ellipse at center, transparent 54%, #fe624f91); }
+.jogo-imersivo #efeito-missao[data-tipo="estavel"] { background: radial-gradient(ellipse at center, transparent 61%, #63ecd467); }
+.jogo-imersivo #efeito-missao.mostrar { animation: efeito-missao 2.7s ease-out both; }
+.jogo-imersivo #equipa-dialogo { margin: 0; position: fixed; left: auto; right: max(1.1rem, env(safe-area-inset-right)); top: 5rem; width: min(26rem, calc(100vw - 2.2rem)); max-height: 77dvh; }
+.jogo-imersivo #equipa .lista-tripulacao { margin: 0; }
+.jogo-imersivo #equipa .lista-tripulacao li { padding-block: .65rem; }
+.jogo-imersivo #abrir-chat[data-por-ler]:not([data-por-ler=""]) { border-color: #f2ba78; }
+@keyframes pulso-alerta { to { box-shadow: 0 0 5px #ff855c42; } }
+@keyframes efeito-missao { 0%, 100% { opacity: 0; } 14% { opacity: .85; } 35% { opacity: .38; } }
+@media (max-width: 720px) {
+  .jogo-imersivo .hud-topo { padding-inline: .75rem; gap: .3rem; }
+  .jogo-imersivo .hud-controlos { gap: .25rem; max-width: 11rem; }
+  .jogo-imersivo .hud-controlos .controlo-icone { min-width: 2.3rem; width: 2.3rem; height: 2.3rem; min-height: 2.3rem; border-radius: .65rem; }
+  .jogo-imersivo .painel-missao { bottom: 6.5rem; right: .75rem; width: min(21rem, calc(100vw - 1.5rem)); }
+  .jogo-imersivo #tarefa { max-height: 34dvh; }
+  .hud-aula { top: 7.2rem; bottom: auto; left: .75rem; width: min(15.5rem, calc(100vw - 1.5rem)); padding: .6rem .7rem; }
+  .hud-aula p { font-size: .76rem; }
+  .jogo-imersivo .joystick { left: .75rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .jogo-imersivo #alternar-missao.alerta-activo, .jogo-imersivo #efeito-missao.mostrar { animation: none; }
+}
+
+.jogo-imersivo #globo-dialogo { width: min(37rem, calc(100vw - 1.5rem)); max-height: 90dvh; overflow: auto; }
+#globo-canvas { display: block; width: 100%; height: min(34dvh, 17rem); min-height: 8rem; background: #080e22; border-radius: .65rem; cursor: grab; touch-action: none; }
+#globo-canvas:active { cursor: grabbing; }
+#globo-controlos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
+#globo-controlos label { display: grid; gap: .26rem; font-size: .79rem; }
+#globo-controlos input { width: 100%; accent-color: #8cfaff; }
+#globo-coord { color: #a9f5fa; font-variant-numeric: tabular-nums; }
+#globo-detalhe, #globo-ajuda, #globo-erro { margin-block: .45rem; font-size: .84rem; }
+#globo-erro:empty { display: none; }
+#globo-confirmar { margin-top: .55rem; }
+.planta-base { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .24rem; margin-top: .52rem; }
+.planta-base .celula-base { padding: .15rem; min-height: 2.45rem; border-radius: .36rem; border: 1px solid #5b879e; color: #b6f7ff; background: #153e50; font-size: .65rem; }
+.planta-base .celula-base:disabled { opacity: .7; color: #8ba3b8; background: #142538; }
+.planta-base .celula-base[data-montada="true"] { color: #d1ffe4; background: #285446; opacity: 1; }
+.planta-base .celula-base:not(:disabled):hover { background: #275b72; }
+.planta-base .celula-base:focus-visible { outline: 2px solid #9df6ff; }
+.hud-telemetria .ambiente-superficie { width: fit-content; max-width: 90vw; margin: .22rem auto; padding: .34rem .64rem; border-radius: .5rem; background: #0b1529ef; color: #d0f3f7; font-size: .76rem; }
+.hud-telemetria .ambiente-superficie.tempestade { border: 1px solid #f39d61; color: #ffd2a6; background: #351e24ed; }
+
+.jogo-imersivo .marcador.alvo-activo { z-index: 3; color: #ffe2c6; border-color: #ffb273; background: #302233; }
+.direccao-posto, .resultado-posto { width: fit-content; max-width: min(88vw, 30rem); margin: .24rem auto; padding: .38rem .65rem; border: 1px solid #eb985f; border-radius: .55rem; color: #ffe0bc; background: #291d28ee; font-size: .78rem; }
+.direccao-posto > span:first-child { display: inline-block; margin-right: .42rem; }
+.resultado-posto[data-tipo="estavel"] { border-color: #64cfb4; color: #cafdeb; background: #0d2929f2; }
+.alvo-missao { color: #ffce9b; font-weight: 650; }
+.visor-equipamento { display: grid; gap: .37rem; padding: .7rem .82rem; margin: .45rem 0 .75rem; border: 1px solid #71bbab; border-radius: .64rem; background: #0b262d; color: #d9faee; }
+.visor-equipamento[data-estado="alerta"] { background: #301f2a; border-color: #e59d66; color: #ffe0bc; }
+.visor-equipamento[data-estado="teste"] { border-color: #88dff3; color: #c8f5ff; }
+.visor-equipamento span { font-size: .88rem; }
+.visor-equipamento .leitura-equipamento { margin: .25rem 0 0; font-size: .87rem; color: #b9f5df; }
+.visor-equipamento .leitura-equipamento[data-tipo="risco"] { color: #ffd4aa; }
+
+.direccao-posto.regresso { border-color: #79b6cd; background: #102a38ef; color: #cff5ff; }
+.sinais-equipamento { height: 1.5rem; display: flex; align-items: end; gap: .24rem; overflow: hidden; color: #7de6c7; }
+.sinais-equipamento i { width: .28rem; height: calc(var(--altura) * 100%); background: currentColor; border-radius: .14rem .14rem 0 0; }
+.visor-equipamento[data-estado="alerta"] .sinais-equipamento { color: #e9a363; }
+.visor-equipamento[data-estado="alerta"] .sinais-equipamento i:nth-child(3n) { height: 12%; }
+.visor-equipamento[data-estado="teste"] .sinais-equipamento i { color: #a2eaff; animation: leitura-posto .5s alternate infinite ease-in-out; }
+.visor-equipamento[data-estado="teste"] .sinais-equipamento i:nth-child(2n) { animation-delay: -.26s; }
+@keyframes leitura-posto { to { height: 16%; } }
+@media (prefers-reduced-motion: reduce) {
+  .visor-equipamento[data-estado="teste"] .sinais-equipamento i { animation: none; }
+}

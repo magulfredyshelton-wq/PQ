@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-MZ">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="Entra na tua conta de Pequenos Astronautas.">
+  <title>Entrar · Pequenos Astronautas</title>
+  <link rel="stylesheet" href="./estilo.css">
+  <link rel="stylesheet" href="./missao.css">
+  <link rel="stylesheet" href="./acesso.css">
+  <script type="module" src="./conta.js"></script>
+</head>
+<body class="acesso">
+  <div class="shell acesso-shell">
+    <header class="topo"><span class="marca"><span class="orbita" aria-hidden="true"></span> Pequenos Astronautas</span></header>
+    <main class="acesso-grelha">
+      <div class="acesso-ilustracao" aria-hidden="true">
+        <span class="acesso-planeta"></span>
+      </div>
+      <section id="conta" class="consola acesso-cartao" aria-labelledby="conta-titulo">
+        <h1 id="conta-titulo">Entrar</h1>
+        <form id="login" class="formulario-acesso">
+          <label>Email<input id="login-email" class="campo" type="email" autocomplete="username" required></label>
+          <label>Palavra-passe<input id="login-senha" class="campo" type="password" autocomplete="current-password" maxlength="128" required></label>
+          <button class="botao primario">Entrar</button>
+          <button id="abrir-registo" class="botao" type="button">Criar conta</button>
+        </form>
+        <form id="registo" class="formulario-acesso" hidden>
+          <label>Idade<input id="registo-idade" class="campo" type="number" min="8" max="120" step="1" required></label>
+          <label>Email<input id="registo-email" class="campo" type="email" autocomplete="email" required></label>
+          <button class="botao primario">Enviar confirmação</button>
+          <button id="voltar-login" class="botao" type="button">Voltar</button>
+        </form>
+        <form id="confirmacao" class="formulario-acesso" hidden>
+          <label>Nome de astronauta<input id="conta-nome" class="campo" maxlength="24" autocomplete="name" required></label>
+          <label>Nickname<input id="conta-nickname" class="campo" maxlength="21" pattern="@?[A-Za-z0-9][A-Za-z0-9_]{2,19}"
+              placeholder="aurora_01" autocomplete="nickname" autocapitalize="none" spellcheck="false"
+              aria-describedby="conta-ajuda-nickname" required></label>
+          <small id="conta-ajuda-nickname" class="ajuda-campo">Usa 3 a 20 letras sem acentos, números ou _. Começa por uma letra ou número.</small>
+          <label>Idade<input id="conta-idade" class="campo idade" type="number" min="8" max="120" step="1" required></label>
+          <label>Palavra-passe<input id="conta-senha" class="campo" type="password" autocomplete="new-password" minlength="12" maxlength="128" required></label>
+          <button class="botao primario">Confirmar e criar conta</button>
+          <button id="cancelar-confirmacao" class="botao" type="button">Voltar</button>
+        </form>
+        <form id="autorizacao" class="formulario-acesso" hidden>
+          <p>Autorizas a conta associada a este pedido a jogar em equipa com pessoas que recebem um código privado. Para menores de 15 anos, a conversa usa frases predefinidas. O jogo guarda o progresso e as mensagens da equipa durante o período indicado na conversa.</p>
+          <label><input id="autorizar-aceite" type="checkbox" required> Sou responsável por esta criança e autorizo o jogo em equipa.</label>
+          <button class="botao primario">Autorizar jogo em equipa</button>
+        </form>
+        <p id="aviso-conta" role="status" aria-live="polite"></p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

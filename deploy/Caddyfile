@@ -1,0 +1,13 @@
+jogo.exemplo.com {
+    encode zstd gzip
+    header {
+        Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' blob: data:; connect-src 'self' data:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'"
+        X-Frame-Options "DENY"
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "no-referrer"
+        Permissions-Policy "camera=(), geolocation=(), microphone=(self)"
+    }
+    @assets path /assets/*
+    header @assets Cache-Control "public, max-age=3600"
+    reverse_proxy 127.0.0.1:8000
+}

@@ -1,0 +1,75 @@
+.consola { padding: 16px; margin: 13px 0; background: #102035; border: 1px solid #344c68; border-radius: 12px; }
+.consola[hidden], .painel-missao[hidden] { display:none; }
+.consola h2, .painel-missao h2 { margin: 0 0 8px; font-size: 1.12rem; }
+.consola p, .painel-missao p { color: #c3d0e2; margin: 7px 0; line-height: 1.45; }
+.linha { display: flex; flex-wrap: wrap; align-items: end; gap: 10px; }
+.linha label { display:grid; gap:4px; font-size:.82rem; color:#c1d4ea; }
+.campo, .botao { font: inherit; color:#e9f3ff; border:1px solid #46637e; border-radius:7px; background:#172b42; padding:8px 11px; min-height:40px; }
+.campo { max-width:100%; }
+textarea.campo { width:100%; margin-top:7px; resize:vertical; }
+.botao { cursor:pointer; }
+.botao:hover:not(:disabled) { border-color:#81e2e9; background:#24425d; }
+.botao:disabled { opacity:.5; cursor:default; }
+.botao.primario { background:#ffb279; color:#192b40; border-color:#ffca9a; font-weight:750; }
+.botao.secundario { border-color:#a47a61; }
+.erro-missao { color:#ffd0bf!important; }
+.painel-missao { margin-top:13px; display:grid; gap:10px; grid-template-columns: minmax(0, 2fr) minmax(255px,1fr); align-items:start; }
+.bloco-missao { background:#102035; border:1px solid #344c68; border-radius:12px; padding:14px; }
+.grelha-dados { display:grid; grid-template-columns:repeat(auto-fit,minmax(92px,1fr)); gap:6px; margin:9px 0; }
+.dado { background:#192d44; border-radius:6px; padding:7px; color:#c9d5e7; font-size:.77rem; }
+.dado strong { display:block; font-size:.92rem; color:#e5f4ff; }
+dialog#terminal-dialogo { width:min(720px,calc(100vw - 24px)); max-height:87dvh; }
+.mapas { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:10px 0; }
+.mapa { min-width:0; margin:0; border:1px solid #3e5877; background:#0b1525; border-radius:9px; padding:9px; }
+.mapa img { display:block; width:100%; height:112px; object-fit:contain; background:#0b1525; margin-bottom:6px; }
+.mapa figcaption { color:#d6e3f5; font-size:.84rem; line-height:1.35; }
+.mapa figcaption strong { display:block; color:#85e4e5; }
+.manifesto { width:100%; border-collapse:collapse; font-size:.85rem; margin:10px 0; }
+.manifesto th, .manifesto td { text-align:left; border-bottom:1px solid #344b63; padding:5px 7px; }
+.manifesto th { color:#a7bcd3; font-weight:600; }
+.manifesto input { width:86px; min-height:31px; padding:4px 7px; }
+.rota { position:relative; min-height:33px; margin:10px 0; display:grid; align-items:center; grid-template-columns:auto 1fr auto; gap:9px; color:#b1d3ee; font-size:.75rem; }
+.rota progress { width:100%; accent-color:#72e8e7; }
+.lista-tripulacao { list-style:none; margin:0; padding:0; }
+.lista-tripulacao li { border-top:1px solid #344b63; padding:7px 0; font-size:.84rem; }
+.lista-tripulacao span { color:#9fdce3; }
+details { margin-top:9px; color:#c7d8eb; }
+details summary { cursor:pointer; }
+@media(max-width:720px) {
+  .painel-missao { grid-template-columns:1fr; }
+  .manifesto th, .manifesto td { padding:4px 3px; font-size:.75rem; }
+  .manifesto input { width:63px; }
+  .mapa img { height:82px; }
+}
+
+.trajectoria { position:relative; }
+.trajectoria progress { display:block; }
+.nave-rota { position:absolute; top:50%; transform:translate(-50%,-50%); color:#fcd099; text-shadow:0 0 9px #ffc67b; transition:left .45s ease; pointer-events:none; }
+#palco[data-cena="viagem"], #palco[data-cena="aproximacao"], #palco[data-cena="retirada"] {
+  background: radial-gradient(1px 1px at 13px 32px, #eefbff 88%, transparent),
+    radial-gradient(1px 1px at 48px 77px, #7fc5f8 88%, transparent),
+    radial-gradient(ellipse at 39% 35%, #243352, #070d20 76%);
+  background-size: 103px 83px, 137px 107px, cover;
+}
+@media (min-width: 1080px) {
+  .em-missao main { display:grid; grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr); gap: 12px; align-items:start; }
+  .em-missao .titulo, .em-missao #aviso-missao { grid-column:1/-1; margin:0; }
+  .em-missao .titulo { margin-top:15px; }
+  .em-missao #aviso-missao:empty { display:none; }
+  .em-missao .painel-missao { grid-template-columns:1fr; margin:0; }
+}
+@media(prefers-reduced-motion: reduce) { .nave-rota { transition:none; } }
+
+
+.linha[hidden] { display: none; }
+.estado { flex-wrap: wrap; justify-content: end; }
+.idade { width: 85px; }
+.partidas-guardadas { display: grid; gap: 6px; padding: 0; margin: 10px 0 0; list-style: none; }
+.partidas-guardadas li { display: flex; justify-content: space-between; align-items: center; gap: 10px; color: #d5e1ed; }
+.lista-tripulacao .botao { min-height: 32px; padding: 5px 8px; font-size: .78rem; }
+
+.avisos-seguranca {
+  border-inline-start: 3px solid var(--acento);
+  padding-inline-start: 1.5rem;
+  color: #ffe2b6;
+}
